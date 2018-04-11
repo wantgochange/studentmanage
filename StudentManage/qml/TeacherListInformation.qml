@@ -64,6 +64,10 @@ Item {
                 anchors.fill: parent
                 onClicked: {
                      console.log("教师添加")
+                    mainstack.push("qrc:/qml/AddTeacherPage.qml",{"teacher_name":teacher_name,
+                                       "teacher_position":teacher_position,
+                                       "teacher_ID":teacher_ID
+                                   },true)
                 }
 
                 onPressed:
@@ -120,29 +124,30 @@ Item {
         Text
         {
             id: position
-            anchors.right: contactsName.left
-            anchors.rightMargin: -40 / 3
+//            anchors.right: contactsName.left
+//            anchors.rightMargin: -40 / 3
+            anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: contactsName.bottom
             anchors.topMargin: 23 / 3
-            text:teacher_position
+            text:teacher_position + " " +teacher_ID
             color: "#bdbed7"
             font.pointSize: 45 / 3
             font.family: "微软雅黑"
         }
 
-        //编号
-        Text
-        {
-            id: positionNum
-            anchors.left: contactsName.right
-            anchors.leftMargin: -40 / 3
-            anchors.top: contactsName.bottom
-            anchors.topMargin: 30 / 3
-            text: "222"
-            color: "#bdbed7"
-            font.pointSize: 45 / 3
-            font.family: "微软雅黑"
-        }
+//        //编号
+//        Text
+//        {
+//            id: positionNum
+//            anchors.left: contactsName.right
+//            anchors.leftMargin: -40 / 3
+//            anchors.top: contactsName.bottom
+//            anchors.topMargin: 30 / 3
+//            text: teacher_ID
+//            color: "#bdbed7"
+//            font.pointSize: 45 / 3
+//            font.family: "微软雅黑"
+//        }
 
         //个人信息
         Text
@@ -152,7 +157,7 @@ Item {
             anchors.leftMargin: 40 / 3
             anchors.top: position.bottom
             anchors.topMargin: 30 / 3
-            text: qsTr("教师信息")
+            text: qsTr("教授班级")
             color: "#ffffff"
             font.pointSize: 54 / 3
             font.family: "微软雅黑"
@@ -165,7 +170,7 @@ Item {
             anchors.rightMargin: 30 / 3
             anchors.top: position.bottom
             anchors.topMargin: 30 / 3
-            text: qsTr("1班101")
+            text: teacher_position
             color: "#b4b5b7"
             font.pointSize: 45 / 3
             font.family: "微软雅黑"
@@ -187,43 +192,32 @@ Item {
                     color: "#777857"
                     radius: 10
                     anchors.horizontalCenter: parent.horizontalCenter
-                    //及格状态
-                    Image
-                    {
-                        id: connectState
-                        width: 51  / 3
-                        height: 113  / 3
-                        anchors.top: parent.top
-                        anchors.topMargin: 33 / 3
-                        anchors.left: parent.left
-                        anchors.leftMargin: 40 / 3
-                        source: comperData(personModel.getData(teacher_ID,index),index)
-                    }
-                    //科目
+
+                    //教授科目
                     Text
                     {
                         id: netWork
                         anchors.top: parent.top
                         anchors.topMargin: 33 / 3
-                        anchors.left: connectState.right
-                        anchors.leftMargin: 18 / 3
-                        text: subject_txt(index)
+                        anchors.left: parent.left
+                        anchors.leftMargin: 40 / 3
+                        text: teacherModel.get_TeacherGroup(index,teacherModel.getTeacherGroup(teacher_ID))
                         color: "#ffffff"
                         font.pointSize: 52 / 3
                         font.family: "微软雅黑"
                     }
-                    //分数
-                    Text {
-                        id: score_txt
-                        text: dataDeal(personModel.getData(teacher_ID,index),contact_ID)
-                        anchors.top: parent.top
-                        anchors.topMargin: 33 / 3
-                        anchors.right: parent.right
-                        anchors.rightMargin: 38 / 3
-                        color: "#ffffff"
-                        font.pointSize: 52 / 3
-                        font.family: "微软雅黑"
-                    }
+//                    //管辖班级
+//                    Text {
+//                        id: score_txt
+//                        text: "一年级"
+//                        anchors.top: parent.top
+//                        anchors.topMargin: 33 / 3
+//                        anchors.right: parent.right
+//                        anchors.rightMargin: 38 / 3
+//                        color: "#ffffff"
+//                        font.pointSize: 52 / 3
+//                        font.family: "微软雅黑"
+//                    }
                 }
             }
         }
@@ -232,72 +226,13 @@ Item {
         {
             id: listView
             width: parent.width;
-//            height: 266
             anchors.top: stateInformation.bottom
             anchors.topMargin: 30 / 3
             anchors.bottom: parent.bottom
-            model:10  //关联数据模型
+            model:teacherModel.getTeacherGroupcount(teacher_ID)  //关联数据模型
             delegate:delegate  //关联代理
             spacing: 20 / 3
             clip:true
-        }
-    }
-    //科目返回
-    function subject_txt(atindex){
-        switch(atindex){
-        case 0:
-            return "语文";
-        case 1:
-            return "数学";
-        case 2:
-            return "英语";
-        case 3:
-            return "体育";
-        case 4:
-            return "班主任";
-        case 5:
-            return "身高";
-        case 6:
-            return "体重";
-        case 7:
-            return "缺课记录";
-        case 8:
-            return "记过次数";
-        case 9:
-            return "职位";
-
-        }
-    }
-    //及格线比较
-    function comperData(score,atindex){
-        if(atindex >=4){
-            return "";
-        }
-        else{
-            if(score >90 && score<=100){
-                return "./../images/contact/connection_successful.png";
-            }
-            else if(score>60 && score< 90){
-                return "./../images/contact/connection_fail.png";
-            }
-            else if(score < 60 && score >=0){
-                return "./../images/contact/not-connected.png";
-            }
-        }
-
-
-
-    }
-    //职位 班主任 返回
-    function dataDeal(r_data,contact_ID){
-        if(r_data == 101){
-            return personModel.getTeacher(contact_ID)
-        }
-        else if(r_data == 102){
-            return personModel.getPosition(contact_ID)
-        }
-        else{
-            return r_data;
         }
     }
 }

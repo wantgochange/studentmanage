@@ -27,16 +27,42 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     src/model/mpersonmodel.cpp \
+    src/model/mteachermode.cpp \
+    src/model/mgroupmodel.cpp \
+    src/letterForName/chinesetopinyin.cpp
 
 HEADERS += \
         mainwindow.h \
     src/model/mpersonmodel.h \
+    src/model/mteachermode.h \
+    src/model/mgroupmodel.h \
+    comdata.h \
+    src/letterForName/chinesetopinyin.h
 
 FORMS += \
         mainwindow.ui
 
-DISTFILES +=
+DISTFILES += \
+    qml/AddPersonPage.qmlc \
+    qml/AlertWindow.qmlc \
+    qml/AddPersonPage.qml \
+    qml/AddTeacherPage.qml \
+    qml/AddWindow.qml \
+    qml/AlertWindow.qml \
+    qml/GroupDelete.qml \
+    qml/GroupEdit.qml \
+    qml/Groupinfomation.qml \
+    qml/GroupList.qml \
+    qml/Mline.qml \
+    qml/MMenu.qml \
+    qml/PersonInformation.qml \
+    qml/PersonList.qml \
+    qml/SearchLine.qml \
+    qml/SelectCLass.qml \
+    qml/SelectGo.qml \
+    qml/TeacherList.qml \
+    qml/TeacherListInformation.qml
 
 RESOURCES += \
-    qml.qrc \
-    images.qrc
+    images.qrc \
+    qml.qrc

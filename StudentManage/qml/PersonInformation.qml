@@ -51,7 +51,7 @@ Item {
         Image {
             id: edit
             source: "./../images/callRecord/editor.png"
-
+            visible: mainstack.permissions
             anchors.right: parent.right
             anchors.rightMargin: 10 / 3
             anchors.top: parent.top
@@ -61,7 +61,11 @@ Item {
             MouseArea{
                 anchors.fill: parent
                 onClicked: {
-                    console.log("人员添加")
+                    console.log("信息修改")
+                    mainstack.push("qrc:/qml/AddPersonPage.qml",{"contact_name":contact_name,
+                                       "contact_position":contact_position,
+                                       "contact_ID":contact_ID
+                                   },true)
                 }
 
                 onPressed:
@@ -121,29 +125,28 @@ Item {
         Text
         {
             id: position
-            anchors.right: contactsName.left
-            anchors.rightMargin: -40 / 3
+            anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: contactsName.bottom
             anchors.topMargin: 23 / 3
-            text:contact_position
+            text:contact_position + " " +contact_ID
             color: "#bdbed7"
             font.pointSize: 45 / 3
             font.family: "微软雅黑"
         }
 
-        //编号
-        Text
-        {
-            id: positionNum
-            anchors.left: contactsName.right
-            anchors.leftMargin: -40 / 3
-            anchors.top: contactsName.bottom
-            anchors.topMargin: 30 / 3
-            text: "222"
-            color: "#bdbed7"
-            font.pointSize: 45 / 3
-            font.family: "微软雅黑"
-        }
+//        //编号
+//        Text
+//        {
+//            id: positionNum
+//            anchors.left: contactsName.right
+//            anchors.leftMargin: -40 / 3
+//            anchors.top: contactsName.bottom
+//            anchors.topMargin: 30 / 3
+//            text: "222"
+//            color: "#bdbed7"
+//            font.pointSize: 45 / 3
+//            font.family: "微软雅黑"
+//        }
 
         //个人信息
         Text
@@ -166,7 +169,7 @@ Item {
             anchors.rightMargin: 30 / 3
             anchors.top: position.bottom
             anchors.topMargin: 30 / 3
-            text: qsTr("1班101")
+            text: groupModel.getGroupName(personModel.getAtgroupInfo(contact_ID))
             color: "#b4b5b7"
             font.pointSize: 45 / 3
             font.family: "微软雅黑"
@@ -199,10 +202,6 @@ Item {
                         anchors.left: parent.left
                         anchors.leftMargin: 40 / 3
                         source: comperData(personModel.getData(contact_ID,index),index)
-
-                        //"./../images/contact/connection_successful.png"
-                        // "./../images/contact/connection_fail.png"
-                        // "./../images/contact/not-connected.png"
                     }
                     //科目
                     Text
@@ -220,7 +219,7 @@ Item {
                     //分数
                     Text {
                         id: score_txt
-                        text: dataDeal(personModel.getData(contact_ID,index),contact_ID)
+                        text: dataDeal(personModel.getData(contact_ID,index),contact_ID,index)
                         anchors.top: parent.top
                         anchors.topMargin: 33 / 3
                         anchors.right: parent.right
@@ -229,25 +228,8 @@ Item {
                         font.pointSize: 52 / 3
                         font.family: "微软雅黑"
                     }
-                    //勾选状态
-                    Image {
-                        id: cheack
-                        source: "./../images/checkFalase.png"
-                        anchors.right: parent.right
-                        anchors.rightMargin: 5
-                        anchors.top: parent.top
-                        anchors.topMargin: 10
-                        visible: mainstack.permissions
-                        MouseArea{
-                            anchors.fill: parent
-                            onClicked: {
-                                cheack.source = "./../images/checkTrue.png"
-                            }
-                        }
-                    }
                 }
             }
-
         }
         //视图
         ListView
@@ -262,49 +244,6 @@ Item {
             delegate:delegate  //关联代理
             spacing: 20 / 3
             clip:true
-        }
-    }
-
-    //新增或删除
-    Image {
-        id: addormove
-        visible: mainstack.permissions
-//        source:   ?"./../images/GroupEdit_image/move_icon.png":"./../images/GroupEdit_image/add_icon.png"
-        source: "./../images/GroupEdit_image/move_icon.png"
-        anchors.bottom: parent.bottom
-        anchors.bottomMargin: 5
-        anchors.left: parent.left
-        width: parent.width
-        height: 50
-        MouseArea{
-            anchors.fill: parent
-            onClicked: {
-                if(groupModel.get_Select_openView()!= 0){//移动
-                    select_MoveState = true
-                    groupModel.changeopenView("",true) //关闭下拉状态
-                }
-                else{//新增
-                    alertWindow.visible = true
-                }
-            }
-            onPressed: {
-                if(groupModel.get_Select_openView()!= 0)
-                {
-                    addormove.source = "./../images/GroupEdit_image/move_click.png"
-                }
-                else{
-                    addormove.source = "./../images/GroupEdit_image/add_click.png"
-                }
-            }
-            onReleased: {
-                if(groupModel.get_Select_openView()!= 0)
-                {
-                    addormove.source = "./../images/GroupEdit_image/move_icon.png"
-                }
-                else{
-                    addormove.source = "./../images/GroupEdit_image/add_icon.png"
-                }
-            }
         }
     }
 
@@ -355,11 +294,11 @@ Item {
 
     }
     //职位 班主任 返回
-    function dataDeal(r_data,contact_ID){
-        if(r_data == 101){
+    function dataDeal(r_data,contact_ID,index){
+        if(index == 4){
             return personModel.getTeacher(contact_ID)
         }
-        else if(r_data == 102){
+        else if(index == 9){
             return personModel.getPosition(contact_ID)
         }
         else{

@@ -1,15 +1,22 @@
 <RCC>
     <qresource prefix="/">
-        <file>qml/PersonList.qml</file>
-        <file>qml/SelectGo.qml</file>
-        <file>qml/Mline.qml</file>
-        <file>qml/SearchLine.qml</file>
-        <file>qml/PersonInformation.qml</file>
-        <file>qml/SelectCLass.qml</file>
-        <file>qml/MMenu.qml</file>
-        <file>qml/TeacherList.qml</file>
+        <file>qml/AddPersonPage.qml</file>
+        <file>qml/AddTeacherPage.qml</file>
+        <file>qml/AddWindow.qml</file>
+        <file>qml/AlertWindow.qml</file>
+        <file>qml/GroupDelete.qml</file>
+        <file>qml/GroupEdit.qml</file>
+        <file>qml/Groupinfomation.qml</file>
         <file>qml/GroupList.qml</file>
+        <file>qml/Mline.qml</file>
+        <file>qml/MMenu.qml</file>
+        <file>qml/PersonInformation.qml</file>
+        <file>qml/PersonList.qml</file>
+        <file>qml/SearchLine.qml</file>
+        <file>qml/SelectCLass.qml</file>
+        <file>qml/SelectGo.qml</file>
+        <file>qml/TeacherList.qml</file>
         <file>qml/TeacherListInformation.qml</file>
-        <file>qml/GroupListInformation.qml</file>
+        <file>qml/GroupAddMember.qml</file>
     </qresource>
 </RCC>

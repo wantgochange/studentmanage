@@ -32,6 +32,20 @@ Item {
         id:titleBar
         width: parent.width
         height: 59
+        Item {
+            id: introduction
+            width: 100
+            height:50
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.horizontalCenter: parent.horizontalCenter
+            Text {
+                id: introduction_txt
+                text: "学 生"
+                color: "#fff"
+                font.pixelSize: 25
+                anchors.centerIn: parent
+            }
+        }
         Item{
             width: 52
             height:52

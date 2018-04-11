@@ -75,5 +75,25 @@
         <file>images/GroupEdit_image/setting_icon.png</file>
         <file>images/checkFalase.png</file>
         <file>images/checkTrue.png</file>
+        <file>images/AddPerson/click_add_picture.png</file>
+        <file>images/AddPerson/click_push.png</file>
+        <file>images/AddPerson/icon_add_picture.png</file>
+        <file>images/AddPerson/icon_head.png</file>
+        <file>images/AddPerson/icon_Id.png</file>
+        <file>images/AddPerson/icon_netNum.png</file>
+        <file>images/AddPerson/icon_position.png</file>
+        <file>images/AddPerson/icon_push.png</file>
+        <file>images/GroupList_image/edit_click.png</file>
+        <file>images/GroupList_image/eidt_icon.png</file>
+        <file>images/GroupList_image/memberNum_icon.png</file>
+        <file>images/GroupList_image/more_click.png</file>
+        <file>images/GroupList_image/more_icon.png</file>
+        <file>images/IMSetting_image/back_click.png</file>
+        <file>images/IMSetting_image/back_icon.png</file>
+        <file>images/IMSetting_image/background.png</file>
+        <file>images/IMSetting_image/icon_OFF.png</file>
+        <file>images/IMSetting_image/icon_ON.png</file>
+        <file>images/IMSetting_image/more_click.png</file>
+        <file>images/IMSetting_image/more_icon.png</file>
     </qresource>
 </RCC>
